@@ -1,13 +1,11 @@
 # The Data Science Life Cycle 📊
+* This Repository is for UCSD 2024 Winter DSC 80 Final Project
+* No raw data is pushed onto Github, just the analysis and predictive models themselves are in the repository.
+* [Here](https://drive.google.com/file/d/1kIbMz6jlhleiZ9_3QthmUnifoSds_2EI/view) is the link to the original data set
 
-This Repository is for UCSD 2024 Winter DSC 80 Final Project
 
-No raw data is pushed onto Github, just the analysis and predictive models themselves are in the repository.
-
-[Here](https://drive.google.com/file/d/1kIbMz6jlhleiZ9_3QthmUnifoSds_2EI/view) is the link to the original data set
-
-# `utils`
-The `utils` folder contains all python functions needed for this project, teh jupytar notebooks all calls the python file for function purpose. Jupytar notebook here is only for visulization. **All important code are in the python file**.
+# `utils` & `.pipe()`
+The `utils` folder contains all python functions needed for this project, teh jupytar notebooks all calls the python file for function purpose. Jupytar notebook here is only for visulization. **All important code are in the python file and applied to the DataFrame using the `.pipe()` function for clear data transformation purposes**.
 
 - food_data: raw data folder containing 2 data frame, one for reviews & rating and one for recipe
 - utils
@@ -17,6 +15,7 @@ The `utils` folder contains all python functions needed for this project, teh ju
     - `missing_m.py`: For assessing **Missngness Mechanism**
 - `eda.ipynb`: Main **Explorative Data Analysis** notebook, describing _data characteristics_
 - `planning.ipynb`: Full empty rubrics for this project
+- `missingeness_mechanism.ipynb`: Assessing the **Missingess Mechanism** of the data set
 
 
 # Casting Logics
