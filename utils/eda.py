@@ -10,8 +10,10 @@ pd.options.plotting.backend = 'plotly'
 def initial(df):
     '''Initial claeaning and megrging of two df, add average ratings'''
 
+    # fillna 0 so avearge rating actually make sense
     df['rating'] = df['rating'].fillna(0)
-    # not unique recipe_id, unique user_id
+
+    # not unique recipe_id
     avg = df.groupby('recipe_id')[['rating']].mean().rename(columns={'rating':'avg_rating'})
     df = df.merge(avg, how='left', left_on='recipe_id',right_index=True)
     return df
@@ -21,8 +23,9 @@ def transform_df(df):
     '''Transforming nutrition to each of its own catagory,
     tags, steps, ingredients to list,
     submission date to timestamp object,
-    and convert types'''
-    
+    convert types,
+    and remove 'nan' to np.NaN'''
+
     # Convert nutrition to its own caatgory
     data = df['nutrition'].str.strip('[]').str.split(',').to_list()
     name = {0:'calories',1:'total_fat',2:'sugar',3:'sodium',4:'protein',5:'sat_fat',6:'carbs'}
@@ -57,6 +60,10 @@ def transform_df(df):
     df[['user_id','recipe_id','contributor_id']] = df[['user_id','recipe_id','contributor_id']].astype(str)
 
     df['rating'] = df['rating'].astype(int)
+
+    # there are 'nan' values, remove that
+    for col in df.select_dtypes(include='object'):
+        df[col] = df[col].apply(lambda x: np.NaN if x=='nan' else x)
 
     return df
 
