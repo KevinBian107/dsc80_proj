@@ -70,6 +70,7 @@ def transform_df(df):
 
 def outlier(df):
     '''take care of outliers in the data frame'''
+    # Remove outlier in graph dierctly
 
     check = ['minutes', 'n_steps', 'n_ingredients', 'calories', 'total_fat', 'sugar', 'sodium', 'protein', 'sat_fat', 'carbs']
     for col in check:#df.select_dtypes(include='number'):
