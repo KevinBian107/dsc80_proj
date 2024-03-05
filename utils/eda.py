@@ -10,8 +10,8 @@ pd.options.plotting.backend = 'plotly'
 def initial(df):
     '''Initial claeaning and megrging of two df, add average ratings'''
 
-    # fillna 0 so avearge rating actually make sense
-    df['rating'] = df['rating'].fillna(0)
+    # fill 0 with np.NaN
+    df['rating'] = df['rating'].apply(lambda x: np.NaN if x==0 else x)
 
     # not unique recipe_id
     avg = df.groupby('recipe_id')[['rating']].mean().rename(columns={'rating':'avg_rating'})
@@ -59,7 +59,7 @@ def transform_df(df):
                                                      'sodium','protein','sat_fat','carbs']].astype(float)
     df[['user_id','recipe_id','contributor_id']] = df[['user_id','recipe_id','contributor_id']].astype(str)
 
-    df['rating'] = df['rating'].astype(int)
+    #df['rating'] = df['rating'].astype(int)
 
     # there are 'nan' values, remove that
     for col in df.select_dtypes(include='object'):
@@ -73,11 +73,13 @@ def outlier(df):
 
     check = ['minutes', 'n_steps', 'n_ingredients', 'calories', 'total_fat', 'sugar', 'sodium', 'protein', 'sat_fat', 'carbs']
     for col in check:#df.select_dtypes(include='number'):
-        q_low = df[col].quantile(0.2)
-        q_hi  = df[col].quantile(0.8)
-        df_filtered = df[(df[col]<q_hi) & (df[col]>q_low)]
+        q_low = df[col].quantile(0.01)
+        #print(q_low)
+        q_hi  = df[col].quantile(0.99)
+        #print(q_hi)
+        df = df[(df[col]<q_hi) & (df[col]>q_low)]
 
-    return df_filtered
+    return df #same name so update df
 
 
 def norm(df):
@@ -91,17 +93,18 @@ def group_recipe(df):
     def helper(series): # this runs slow
         return series.mean() if not isinstance(series, str) else series.first
 
+    func = lambda x: list(x)
     check_dict = {'minutes':'mean', 'n_steps':'mean', 'n_ingredients':'mean',
                 'avg_rating':'mean', 'rating':'mean', 'calories':'mean',
                 'total_fat':'mean', 'sugar':'mean', 'sodium':'mean',
                 'protein':'mean', 'sat_fat':'mean', 'carbs':'mean',
                 'steps':'first', 'name':'first', 'description':'first',
-                'ingredients':'first', 'user_id':'first', 'contributor_id':'first',
-                'review_date':'first', 'review':'first',  'recipe_date':'first',
-                'tags':'first'}
+                'ingredients':func, 'user_id':func, 'contributor_id':func,
+                'review_date':func, 'review':func,  'recipe_date':func,
+                'tags':func}
 
     grouped = df.groupby('recipe_id').agg(check_dict)
-    grouped['rating'] = grouped['rating'].astype(int)
+    #grouped['rating'] = grouped['rating'].astype(int)
 
     return grouped
 
@@ -109,7 +112,17 @@ def group_recipe(df):
 def group_user(df):
     '''function for grouping by unique user_id and concating all steps/names/tags of recipe and averaging rating give'''
     
-    return df.groupby('user_id')['steps','rating','name','tags'].agg({'steps':lambda x: list(chain.from_iterable(x)),
-                                                        'name':lambda x: list(x),
-                                                        'tags':lambda x: list(chain.from_iterable(x)),
-                                                        'rating':'mean'})
+    return (df
+            .groupby('user_id')['steps','rating','name','tags','minutes','calories','description','n_ingredients','ingredients','contributor_id']
+            .agg({'steps':lambda x: list(chain.from_iterable(x)),
+                  'name':lambda x: list(x),
+                  'tags':lambda x: list(chain.from_iterable(x)),
+                  'rating':'mean',
+                  'minutes':'mean',
+                  'calories':'mean',
+                  'description':lambda x: list(x),
+                  'n_ingredients':'mean',
+                  'ingredients':lambda x: list(chain.from_iterable(x)),
+                  'contributor_id':lambda x: list(x)
+                  })
+    )

@@ -23,10 +23,10 @@ The `utils` folder contains all python functions needed for this project, teh ju
 1. `String`: [name, contributor_id, user_id, recipe_id, ]
     - quantitative or qualitative, but cannot perform mathamatical operations (**quntitative discrete**)
     - `name` is the name of recipe
-    - `contributor_id` is the author id of the recipe _(shape=10609)_
-    - `recipe_id` is the id of teh recipe _(shape=45686)_
+    - `contributor_id` is the author id of the recipe _(shape=7157)_
+    - `recipe_id` is the id of teh recipe _(shape=25287)_
         - `id` from the original dataframe also is the id of the recipe, dropped after merging
-    - `user_id` is the id of the reviewer _(shape=13751)_
+    - `user_id` is the id of the reviewer _(shape=8402)_
 2. `List`: [tags, steps, description, ingredients, review]
     - qualitative, no mathamatical operation (**qualitative discrete**)
 3. `int`: [n_steps, minutes, n_ingredients, rating]

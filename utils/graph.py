@@ -16,7 +16,7 @@ from pathlib import Path
 
 '''This file is for graphing only'''
 
-# The stuff below is for Lecture 7/8.
+# for mm.ipynb
 def create_kde_plotly(df, group_col, group1, group2, vals_col, title=''):
     fig = ff.create_distplot(
         hist_data=[df.loc[df[group_col] == group1, vals_col], df.loc[df[group_col] == group2, vals_col]],
@@ -24,6 +24,7 @@ def create_kde_plotly(df, group_col, group1, group2, vals_col, title=''):
         show_rug=False, show_hist=False
     )
     return fig.update_layout(title=title)
+
 
 def multiple_hists(df_map, histnorm="probability", title=""):
     values = [df_map[df_name]["child"].dropna() for df_name in df_map]
@@ -42,14 +43,14 @@ def multiple_hists(df_map, histnorm="probability", title=""):
     return fig
 
 
-def multiple_kdes(df_map, title=""):
-    values = [df_map[key]["child"].dropna() for key in df_map]
-    labels = list(df_map.keys())
-    fig = ff.create_distplot(
-        hist_data=values,
-        group_labels=labels,
-        show_rug=False,
-        show_hist=False,
-        colors=px.colors.qualitative.Dark2[: len(df_map)],
-    )
-    return fig.update_layout(title=title).update_xaxes(title="child")
+# def multiple_kdes(df_map, title=""):
+#     values = [df_map[key]["child"].dropna() for key in df_map]
+#     labels = list(df_map.keys())
+#     fig = ff.create_distplot(
+#         hist_data=values,
+#         group_labels=labels,
+#         show_rug=False,
+#         show_hist=False,
+#         colors=px.colors.qualitative.Dark2[: len(df_map)],
+#     )
+#     return fig.update_layout(title=title).update_xaxes(title="child")
