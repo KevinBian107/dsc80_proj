@@ -57,7 +57,8 @@ def transform_df(df):
     df[['calories','total_fat','sugar',
         'sodium','protein','sat_fat','carbs']] = df[['calories','total_fat','sugar',
                                                      'sodium','protein','sat_fat','carbs']].astype(float)
-    df[['user_id','recipe_id','contributor_id']] = df[['user_id','recipe_id','contributor_id']].astype(str)
+    
+    df[['user_id','recipe_id','contributor_id']] = df[['user_id','recipe_id','contributor_id']].astype(int)
 
     #df['rating'] = df['rating'].astype(int)
 
