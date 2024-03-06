@@ -13,11 +13,11 @@ The `utils` folder contains all python functions needed for this project, teh ju
     - `graph.py`: Some lareg graphing functions for visualizations
     - `missing_m.py`: For assessing **Missngness Mechanism**
 - Jupytar Notebooks:
-- `planning.ipynb`: Full empty rubrics for this project
-- `eda.ipynb`: Main **Explorative Data Analysis** notebook, describing _data characteristics_
-- `missing_m.ipynb`: Assessing the **Missingess Mechanism** of the data set
-- `hypothesis.ipynb`: Conducting hypothesis testings
-- `model.ipynb`: Building a **Baseline model** for prediction
+    - `planning.ipynb`: Full empty rubrics for this project
+    - `eda.ipynb`: Main **Explorative Data Analysis** notebook, describing _data characteristics_
+    - `missing_m.ipynb`: Assessing the **Missingess Mechanism** of the data set
+    - `hypothesis.ipynb`: Conducting hypothesis testings
+    - `model.ipynb`: Building a **Baseline model** for prediction
 
 # Casting Logics
 1. `int`: [name, contributor_id, user_id, recipe_id, ]
