@@ -16,7 +16,7 @@ The `utils` folder contains all python functions needed for this project, teh ju
     - `planning.ipynb`: Full empty rubrics for this project
     - `eda.ipynb`: Main **Explorative Data Analysis** notebook, describing _data characteristics_
     - `missing_m.ipynb`: Assessing the **Missingess Mechanism** of the data set
-    - `hypothesis.ipynb`: Conducting hypothesis testings
+    - `permutation.ipynb`: Conducting hypothesis testings
     - `model.ipynb`: Building a **Baseline model** for prediction
 
 # Casting Logics

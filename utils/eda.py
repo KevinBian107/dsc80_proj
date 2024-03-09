@@ -112,8 +112,8 @@ def group_recipe(df):
 def group_user(df):
     '''function for grouping by unique user_id and concating all steps/names/tags of recipe and averaging rating give'''
     
-    return (df
-            .groupby('user_id')['steps','rating','name','tags','minutes','calories','description','n_ingredients','ingredients','contributor_id']
+    return (df#[df['rating']==5]
+            .groupby('user_id')['steps','rating','name','tags','minutes','calories','description','n_ingredients','ingredients','contributor_id','review']
             .agg({'steps':lambda x: list(chain.from_iterable(x)),
                   'name':lambda x: list(x),
                   'tags':lambda x: list(chain.from_iterable(x)),
@@ -123,6 +123,7 @@ def group_user(df):
                   'description':lambda x: list(x),
                   'n_ingredients':'mean',
                   'ingredients':lambda x: list(chain.from_iterable(x)),
-                  'contributor_id':lambda x: list(x)
+                  'contributor_id':lambda x: list(x),
+                  'review':lambda x: list(x),
                   })
     )
