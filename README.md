@@ -35,3 +35,7 @@ The `utils` folder contains all python functions needed for this project, teh ju
     - quantitative mathamatical operations allowed (**quantitative continuous**)
 5. `Timestamp`: [recipe_date, review_date]
     - quantitative mathamatical operations allowed (**quantitative continuous**)
+
+# Model Selection
+We are currently using `word2vec` to process some texual information, which uses the NLP CBOW and Skip-gram model.
+<center><img src="imgs/wv3.png" width=70%></center>
