@@ -101,7 +101,7 @@ def group_recipe(df):
                 'steps':'first', 'name':'first', 'description':'first',
                 'ingredients':func, 'user_id':func, 'contributor_id':func,
                 'review_date':func, 'review':func,  'recipe_date':func,
-                'tags':func}
+                'tags':lambda x: list(chain.from_iterable(x))}
 
     grouped = df.groupby('recipe_id').agg(check_dict)
     #grouped['rating'] = grouped['rating'].astype(int)
