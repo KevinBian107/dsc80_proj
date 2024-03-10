@@ -1,3 +1,8 @@
+# ToDo
+1. Recreate Graphs for EDA
+2. Recheck missingness mechanism and consider imputation
+3. Build Base Pipeline for teh predictive problem
+
 # The Data Science Life Cycle 📊
 * This Repository is for UCSD 2024 Winter DSC 80 Final Project
 * No raw data is pushed onto Github, just the analysis and predictive models themselves are in the repository.
@@ -18,6 +23,7 @@ The `utils` folder contains all python functions needed for this project, teh ju
     - `missing_m.ipynb`: Assessing the **Missingess Mechanism** of the data set
     - `permutation.ipynb`: Conducting hypothesis testings
     - `model.ipynb`: Building a **Baseline model** for prediction
+    - `word2vec.ipynb`: Basic Introduction to the idea of NLP word conversion to vector distributional representation
 
 # Casting Logics
 1. `int`: [name, contributor_id, user_id, recipe_id, ]
@@ -36,6 +42,29 @@ The `utils` folder contains all python functions needed for this project, teh ju
 5. `Timestamp`: [recipe_date, review_date]
     - quantitative mathamatical operations allowed (**quantitative continuous**)
 
-# Model Selection
-We are currently using `word2vec` to process some texual information, which uses the NLP CBOW and Skip-gram model.
+# Predictive Question:
+We want to predict `rating` as a classfication problem, prdicting `rating` (5 catagories) in the user_id DataFrame to demonstarte understanding of user preference.
+- Using the original big DataFrame for predicting rating
+
+### Feature Engineering
+**Direct Feature**
+- `n_ingredients`
+- `n_steps`
+- `minutes`
+- `calories`
+- `sodium`
+
+**Feature Engineering**
+- `tfidf_10_partial_mean` of `description` for **recipe per user_id** (may have more than one recipe) that have **high ratings**
+    - This evaluates whether a word shows more often in this **user's high rated recipe decription** compare to all **recipe decription**, thus, meaning that it is more important to this user.
+- `Word2Vec` Similarity
+    - We are currently using `word2vec` to process some texual information, which uses the NLP CBOW and Skip-gram model.
+    - All good `recipe` (above 3 rating) can be a pool of words in a **vector space** (from description, can have more)
+    - We want to see how similar (cosine distance) between each recipe `word2vec` description's vector to the good pool of vectors
 <center><img src="imgs/wv3.png" width=70%></center>
+
+### Ensemble Learning (Bagging, Stacking, Boosting)
+Heterogenous Ensemble Voting:
+1. Homogenous Ensemble `Rabndom Forest`
+2. Model2...
+3. Model3...
