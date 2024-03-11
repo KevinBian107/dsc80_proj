@@ -90,9 +90,6 @@ def norm(df):
 
 
 def group_recipe(df):
-    def helper(series): # this runs slow
-        return series.mean() if not isinstance(series, str) else series.first
-
     func = lambda x: list(x)
     check_dict = {'minutes':'mean', 'n_steps':'mean', 'n_ingredients':'mean',
                 'avg_rating':'mean', 'rating':'mean', 'calories':'mean',
@@ -112,7 +109,7 @@ def group_recipe(df):
 def group_user(df):
     '''function for grouping by unique user_id and concating all steps/names/tags of recipe and averaging rating give'''
     
-    return (df#[df['rating']==5]
+    return (df #[df['rating']==5]
             .groupby('user_id')['steps','rating','name','tags','minutes','calories','description','n_ingredients','ingredients','contributor_id','review']
             .agg({'steps':lambda x: list(chain.from_iterable(x)),
                   'name':lambda x: list(x),
