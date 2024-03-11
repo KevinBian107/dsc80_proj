@@ -44,27 +44,18 @@ The `utils` folder contains all python functions needed for this project, teh ju
 
 # Predictive Question:
 We want to predict `rating` as a classfication problem, prdicting `rating` (5 catagories) in the user_id DataFrame to demonstarte understanding of user preference.
-- Using the original big DataFrame for predicting rating
+- We are using the original big DataFrame for predicting rating
 
 ### Feature Engineering
-**Direct Feature**
 - `n_ingredients`
 - `n_steps`
 - `minutes`
 - `calories`
 - `sodium`
-
-**Feature Engineering**
-- `tfidf_10_partial_mean` of `description` for **recipe per user_id** (may have more than one recipe) that have **high ratings**
-    - This evaluates whether a word shows more often in this **user's high rated recipe decription** compare to all **recipe decription**, thus, meaning that it is more important to this user.
+- `tfidf` deternmining most important words of `description` and check if it is in low rated group
 - `Word2Vec` Similarity
-    - We are currently using `word2vec` to process some texual information, which uses the NLP CBOW and Skip-gram model.
-    - All good `recipe` (above 3 rating) can be a pool of words in a **vector space** (from description, can have more)
-    - We want to see how similar (cosine distance) between each recipe `word2vec` description's vector to the good pool of vectors
-<center><img src="imgs/wv3.png" width=70%></center>
 
 ### Ensemble Learning (Bagging, Stacking, Boosting)
 Heterogenous Ensemble Voting:
 1. Homogenous Ensemble `Rabndom Forest`
-2. Model2...
-3. Model3...
+2. Logistic Rgression
