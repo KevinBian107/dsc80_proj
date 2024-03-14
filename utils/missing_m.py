@@ -49,7 +49,6 @@ def mar_check_continuous(df,miss_col, dep_col):
     return fig.show()
 
 
-
 def permutation_mean(df, miss_col, dep_col, rep):
     '''conduct permutation testing for testing mar in data frame '''
 

@@ -1,3 +1,8 @@
+# ToDo
+1. Recreate Graphs for EDA
+2. Recheck missingness mechanism and consider imputation
+3. Build Base Pipeline for teh predictive problem
+
 # The Data Science Life Cycle 📊
 * This Repository is for UCSD 2024 Winter DSC 80 Final Project
 * No raw data is pushed onto Github, just the analysis and predictive models themselves are in the repository.
@@ -18,6 +23,7 @@ The `utils` folder contains all python functions needed for this project, teh ju
     - `missing_m.ipynb`: Assessing the **Missingess Mechanism** of the data set
     - `permutation.ipynb`: Conducting hypothesis testings
     - `model.ipynb`: Building a **Baseline model** for prediction
+    - `word2vec.ipynb`: Basic Introduction to the idea of NLP word conversion to vector distributional representation
 
 # Casting Logics
 1. `int`: [name, contributor_id, user_id, recipe_id, ]
@@ -35,3 +41,21 @@ The `utils` folder contains all python functions needed for this project, teh ju
     - quantitative mathamatical operations allowed (**quantitative continuous**)
 5. `Timestamp`: [recipe_date, review_date]
     - quantitative mathamatical operations allowed (**quantitative continuous**)
+
+# Predictive Question:
+We want to predict `rating` as a classfication problem, prdicting `rating` (5 catagories) in the user_id DataFrame to demonstarte understanding of user preference.
+- We are using the original big DataFrame for predicting rating
+
+### Feature Engineering
+- `n_ingredients`
+- `n_steps`
+- `minutes`
+- `calories`
+- `sodium`
+- `tfidf` deternmining most important words of `description` and check if it is in low rated group
+- `Word2Vec` Similarity
+
+### Ensemble Learning (Bagging, Stacking, Boosting)
+Heterogenous Ensemble Voting:
+1. Homogenous Ensemble `Rabndom Forest`
+2. Logistic Rgression
